@@ -305,7 +305,7 @@ public class TestRunDetailsPage {
 
     private String getStartTime(){
         if(object != null && object.getRunStartTime() != null){
-            return new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(object.getRunStartTime());
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStartTime());
         } else {
             return "<i>unknown</i>";
         }
@@ -313,7 +313,7 @@ public class TestRunDetailsPage {
 
     private String getStopTime(){
         if(object != null && object.getRunStopTime() != null){
-            return new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(object.getRunStopTime());
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStopTime());
         } else {
             return "<i>unknown</i>";
         }
