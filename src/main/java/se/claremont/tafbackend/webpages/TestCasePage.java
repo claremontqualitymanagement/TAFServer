@@ -4,7 +4,6 @@ import se.claremont.autotest.common.logging.KnownError;
 import se.claremont.autotest.common.logging.LogLevel;
 import se.claremont.autotest.common.logging.LogPost;
 import se.claremont.autotest.common.reporting.HtmlStyles;
-import se.claremont.autotest.common.reporting.TafVersionGetter;
 import se.claremont.autotest.common.reporting.UxColors;
 import se.claremont.autotest.common.reporting.testcasereports.TestCaseLogReporterHtmlLogFile;
 import se.claremont.autotest.common.reporting.testrunreports.HtmlSummaryReport;
@@ -39,9 +38,14 @@ public class TestCasePage {
         }
     }
 
+    private String extraHeadSections(){
+        return "    <title>" + testCase.testName + " execution log</title>" + LF +
+                "    <link rel=\"stylesheet\" href=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css\"/>";
+    }
+
     public String asHtml(){
         String html = "<!DOCTYPE html>" + LF + "<html lang=\"en\">" + LF + LF +
-                htmlSectionHtmlHead() +
+                CommonSections.headSection(scriptSection(), styles(), extraHeadSections()) +
                 "  <body>" + LF + LF +
                 asHtmlSection() +
                 "  </body>" + LF + LF +
@@ -76,72 +80,33 @@ public class TestCasePage {
      * @return HTML
      */
     private String asHtmlSection(){
-        return htmlSectionBodyHeader() +
-                htmlSectionEncounteredKnownErrors() +
-                htmlSectionTestCaseData() +
-                htmlSectionNonEncounteredKnownTestCaseErrors() +
-                htmlSectionTestCaseLogEntries() +
-                footer();
+        StringBuilder sb = new StringBuilder();
+        sb.append("    <table id=\"").append(TestRunDetailsPage.HtmlStyleNames.CONTENT.toString()).append("\">").append(LF).append(LF);
+        sb.append("      <tr>").append(LF);
+        sb.append("        <td>").append(LF).append(LF);
+        sb.append(htmlSectionBodyHeader());
+        sb.append(htmlSectionEncounteredKnownErrors());
+        sb.append(htmlSectionTestCaseData());
+        sb.append(htmlSectionNonEncounteredKnownTestCaseErrors());
+        sb.append(htmlSectionTestCaseLogEntries());
+        sb.append(CommonSections.pageFooter());
+        sb.append("        </td>").append(System.lineSeparator());
+        sb.append("      </tr>").append(System.lineSeparator()).append(System.lineSeparator());
+        sb.append("    </table>").append(System.lineSeparator()).append(System.lineSeparator());
+        return sb.toString();
     }
-
-    public String htmlSectionHtmlHead(){
-        return "  <head>" + LF + LF +
-                "    <title>" + testCase.testName + " execution log</title>" + LF +
-                "    <link rel=\"shortcut icon\" href=\"http://46.101.193.212/TAF/images/facicon.png\">" + LF +
-                "    <meta name=\"description\" content=\"Test case result for test run for test case " + testCase.testName + "\"/>" + LF +
-                "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" + LF +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>" + LF + LF +
-                "    <link rel=\"stylesheet\" href=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css\"/>\n" + LF + LF +
-                "    <style>" + LF +
-                styles() +
-                "    </style>" + LF + LF +
-                scriptSection() +
-                "  </head>" + LF + LF;
-    }
-
-    /**
-     * Produces a document footer for the summary reportTestRun.
-     * @return HTML section for footer
-     */
-    private String footer(){
-        String versionInfo = "";
-        String version = TafVersionGetter.tafVersion();
-        if(version != null){
-            versionInfo = "<a href=\"https://github.com/claremontqualitymanagement/TestAutomationFramework/releases\" target=\"_blank\" class=\"" + HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + "\">";
-            versionInfo += "TAF version " + version + ".</a>";
-        }
-        //noinspection deprecation
-        return "<br><br>" +
-                "          <table class=\"footer\" width=\"100%\">" + LF +
-                "            <tr>" + LF +
-                "              <td class=\"bottomlogo\" width=\"100%\"><a href=\"http://www.claremont.se\"><img alt=\"Claremont logo\" class=\"bottomlogo\" src=\"http://46.101.193.212/TAF/images/claremontlogo.gif\"></a></td>" + LF +
-                "            </tr><tr>" + LF +
-                "              <td width=\"100%\" class=\"" + HtmlSummaryReport.HtmlStyleNames.COPYRIGHT.toString() + "\"><br>TAF is licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\" class=\"" + HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + "\">Apache 2.0 license</a>. &copy; Claremont " + new SimpleDateFormat("yyyy").format(new Date()) + "." + versionInfo + "</td>" + LF +
-                "            </tr>" + LF +
-                "          </table>" + LF;
-    }
-
 
     /**
      * Used to append HTML style information to the HTML based testCaseLog
      * @return A HTML formatted string to incorporate in the style tag in the HTML testCaseLog
      */
     private static String styles(){
-        return "      body                    { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; background-color: " + UxColors.WHITE.getHtmlColorCode() + "; width:90%; margin-left: 2%; margin-top: 1%; color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
-                "      h1, h2                  { margin-top: 20px; margin-bottom: 10px; line-height: 1.1; font-family: inherit; }" + LF +
-                "      h1                      { font-size:24px; }" + LF +
-                "      img.toplogo             { width: 30%; }" + LF +
-                "      h2                      { font-size:20px; }" + LF +
-                "      .ui-accordion .ui-accordion-content  { padding:0px; }" + LF +
-                "      table                   { border: 1px solid " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
-                "      table.footer            { border: 0px solid " + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
-                "      .pagetitle              { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; font-size:24px; font-weight: bold; }" + LF +
+        return  "      .ui-accordion .ui-accordion-content  { padding:0px; }" + LF +
                 TestCaseLogSection.htmlStyleInformation() +
                 HtmlStyles.tableVerificationStyles() +
                 LogPost.htmlStyleInformation() +
                 "      b.good                  { color: " + UxColors.GREEN.getHtmlColorCode() + "; }" + LF +
                 "      b.bad                   { color: " + UxColors.RED.getHtmlColorCode() + "; }" + LF +
-                "      ." + HtmlSummaryReport.HtmlStyleNames.COPYRIGHT.toString() + "                                 { background-color: " + UxColors.WHITE.getHtmlColorCode() + "; color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-align: center; }" + LF +
                 "      td." + SupportMethods.enumMemberNameToLower(TestCaseLogReporterHtmlLogFile.HtmlLogStyleNames.KNOWN_ERROR.toString()) + "           { color: " + UxColors.RED.getHtmlColorCode() + "; font-weight: bold; } " + LF +
                 "      table." + SupportMethods.enumMemberNameToLower(TestCaseLogReporterHtmlLogFile.HtmlLogStyleNames.STRIPED.toString()) + "  { background-color:" + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
                 "      table." + SupportMethods.enumMemberNameToLower(TestCaseLogReporterHtmlLogFile.HtmlLogStyleNames.STRIPED.toString()) + " tr:nth-child(even)                 { background-color: " + UxColors.LIGHT_GREY.getHtmlColorCode() + "; }" + LF +
@@ -151,14 +116,6 @@ public class TestCasePage {
                 "      td.logMessage            { max-width: 99%; }" + LF +
                 "      img.screenshot:hover     { margin: -1px -2px -2px -1px; width: 340px; }" + se.claremont.autotest.common.support.SupportMethods.LF +
                 "      img.screenshot           { border: 0px none; width:105px; background: #999; }" + LF +
-                "      img.bottomlogo           { width: 20%; }" + LF +
-                "      td.bottomlogo            { text-align: center; background-color: " + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
-                "      a." + HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + "      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: none; }" + LF +
-                "      a." + HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":visited      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: none; }" + LF +
-                "      a." + HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":hover      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: underline; }" + LF +
-
-                //StylesFromExternalModules
-
                 HtmlStyles.asString() +
                 //TableData.TableVerifierLoggingHtmlStyles.styles() +
 
@@ -175,7 +132,6 @@ public class TestCasePage {
                 "                             padding-bottom: 20px!ie7;"  + LF +
                 "                             max - height: 600px;" + LF +
                 "      }" + LF +
-                "      .footer                  { border: 0px none; width: 100%; color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-align: center; align: center; }" + LF +
                 htmlStyleHelpOverlay();
 
     }
@@ -208,8 +164,10 @@ public class TestCasePage {
     }
 
     private String htmlSectionBodyHeader(){
-        return "    <div id=\"" + SupportMethods.enumMemberNameToLower(TestCaseLogReporterHtmlLogFile.HtmlLogStyleNames.HEAD.toString()) + "\">" + LF +
-                "      <img src=\"" + TestRun.getSettingsValue(Settings.SettingParameters.PATH_TO_LOGO) + "\" alt=\"logo\" class=\"toplogo\">" + LF + "<br>" + LF + "<br>" + LF +
+        StringBuilder sb = new StringBuilder();
+        sb.append(CommonSections.pageHeader());
+        sb.append("    <div id=\"" + SupportMethods.enumMemberNameToLower(TestCaseLogReporterHtmlLogFile.HtmlLogStyleNames.HEAD.toString()) + "\">" + LF +
+                "<br>" + LF + "<br>" + LF +
                 //"      <a href=\"https://github.com/claremontqualitymanagement/TestAutomationFramework\" target=\"_blank\"><img alt=\"logo\" id=\"logo\" src=\"https://avatars3.githubusercontent.com/u/22028977?v=3&s=400\"></a>" + LF +
                 "      <br><span class=\"pagetitle\">TAF test case results log</span>" + LF +
                 "         <span class=\"pagetitle\" id=\"help\">(?)<span id=\"helpText\">" + helpText() +
@@ -230,7 +188,8 @@ public class TestCasePage {
                 "         Number of non-verifying execution steps performed: " + numberOfExecitionStepsPerformed() + LF +
                 "      </p>" + LF +
                 "      <br>" + LF +
-                "    </div>" + LF + LF;
+                "    </div>" + LF + LF);
+        return sb.toString();
     }
 
     private int numberOfVerificationsPerformed() {
@@ -396,8 +355,8 @@ public class TestCasePage {
 
     private String scriptSection(){
         return "      <script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-latest.min.js\"></script>" + LF +
-                "      <script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js\"></script>" + LF +
-                "      <script type=\"text/javascript\">" + LF + LF +
+                "     <script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js\"></script>" + LF +
+                "     <script type=\"text/javascript\">" + LF + LF +
                 "         function showDebug(shouldShowDebug){" + LF +
                 "           $(\".logpost.debug\").toggle(shouldShowDebug);" + LF +
                 "         }" + LF +
@@ -412,7 +371,7 @@ public class TestCasePage {
                 "           $(\".expandable.initially-expanded\").accordion(\"option\", \"active\", 0);" + LF +
                 "         });" + LF +
                 "" + LF +
-                "      </script>" + LF;
+                "     </script>" + LF;
     }
 
 

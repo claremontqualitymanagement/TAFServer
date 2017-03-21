@@ -3,6 +3,7 @@ package se.claremont.tafbackend.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
 import se.claremont.tafbackend.storage.TestRunList;
+import se.claremont.tafbackend.webpages.ErrorPage;
 import se.claremont.tafbackend.webpages.SupportMethods;
 import se.claremont.tafbackend.webpages.TestRunDetailsPage;
 
@@ -41,7 +42,7 @@ public class TestRunMapper {
 
     public String toHtml(){
         TafBackendServerTestRunReporter element = object();
-        if(element == null) return SupportMethods.toHtmlPage("Error. Cannot create HTML page from null TestRunResult element.");
+        if(element == null) return ErrorPage.toHtml("<p>Error: Cannot create HTML page from null TestRunResult element.</p>");
         return new TestRunDetailsPage(element).toHtml();
     }
 }

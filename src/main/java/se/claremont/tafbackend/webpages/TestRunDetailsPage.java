@@ -69,7 +69,7 @@ public class TestRunDetailsPage {
         String link = testCase.pathToHtmlLog;
         if(link.replace("\\", "/").toLowerCase().startsWith("smb://"))
             link = link.replace("\\", "/").substring(6);
-        testCaseSummary += "            <tr class=\"" + testCase.resultStatus.toString() + "\"><td>" + testCase.testSetName + "</td><td>" + testCase.testName + "</td><td>" + StringManagement.enumCapitalNameToFriendlyString(testCase.resultStatus.toString()) + "</td><td><a href=\"../testcase/" + index + "\" target=\"_blank\">Log</a></td></tr>" + LF;
+        testCaseSummary += "            <tr class=\"" + testCase.resultStatus.toString() + "\"><td>" + testCase.testSetName + "</td><td>" + testCase.testName + "</td><td>" + StringManagement.enumCapitalNameToFriendlyString(testCase.resultStatus.toString()) + "</td><td><a href=\"taf/" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + index + "\" target=\"_blank\">Log</a></td></tr>" + LF;
         //testCaseSummary += solvedKnownErrorsFromTestCaseLocalKnownErrorsList(testCase);
         switch (testCase.resultStatus){
             case PASSED:
@@ -181,18 +181,29 @@ public class TestRunDetailsPage {
      */
     private String htmlElementStyles(){
         return LF +
-                "    <style>" + LF +
                 "      #" + HtmlStyleNames.SOLVED_KNOWN_ERRORS.toString() + "               { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
-                "      body                  { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; background-color: " + UxColors.LIGHT_BLUE.getHtmlColorCode() + "; }" + LF +
-                "      a                     { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + ";}" + LF +
-                "      th                    { text-align: left; }" + LF +
-                "      img.toplogo           { width: 30%; }" + LF +
-                "      img.bottomlogo        { width: 20%; }" + LF +
-                "      td.bottomlogo         { text-align: center; background-color: " + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
-                "      table#" + HtmlStyleNames.CONTENT.toString() + "      { background-color: " + UxColors.WHITE.getHtmlColorCode() + "; padding: 30px; margin: 30px; }" + LF +
                 "      tr." + HtmlStyleNames.HOVERABLE.toString() + ":hover           { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
                 "      tr." + HtmlStyleNames.SOLVED_KNOWN_ERRORS.toString() + "       { font-weight: bold; color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
                 "      li." + HtmlStyleNames.HOVERABLE.toString() + ":hover           { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
+                "      table#" + TestRunDetailsPage.HtmlStyleNames.CONTENT.toString() + "      { background-color: " + UxColors.WHITE.getHtmlColorCode() + "; padding: 30px; margin: 30px; }" + LF +
+                "      tr." + TestRunDetailsPage.HtmlStyleNames.HOVERABLE.toString() + ":hover           { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
+                "      tr." + TestRunDetailsPage.HtmlStyleNames.SOLVED_KNOWN_ERRORS.toString() + "       { font-weight: bold; color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
+                "      li." + TestRunDetailsPage.HtmlStyleNames.HOVERABLE.toString() + ":hover           { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
+                "      table#" + TestRunDetailsPage.HtmlStyleNames.STATISTICS.toString() + "                           { background-color: " + UxColors.WHITE.getHtmlColorCode() + "; border-collapse: collapse; border: 1p solid " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
+                "      ." + TestCase.ResultStatus.FAILED_WITH_ONLY_KNOWN_ERRORS.toString() + "             { color: " + UxColors.DARK_YELLOW.getHtmlColorCode() + "; }" + LF +
+                "      ." + TestCase.ResultStatus.PASSED.toString() + "                                    { color: " + UxColors.GREEN.getHtmlColorCode() + "; }" + LF +
+                "      ." + TestCase.ResultStatus.FAILED_WITH_BOTH_NEW_AND_KNOWN_ERRORS.toString() + "     { color: " + UxColors.ORANGE.getHtmlColorCode() + "; font-weight: bold; }" + LF +
+                "      ." + TestCase.ResultStatus.FAILED_WITH_ONLY_NEW_ERRORS.toString() + "               { color: " + UxColors.RED.getHtmlColorCode() + "; font-weight: bold; }" + LF +
+                "      ." + TestCase.ResultStatus.UNEVALUATED.toString() + "                               { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; text-align: center; }" + LF +
+                "      ." + TestRunDetailsPage.HtmlStyleNames.COPYRIGHT.toString() + "                                 { background-color: " + UxColors.WHITE.getHtmlColorCode() + "; color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-align: center; }" + LF +
+                "       tr#" + TestRunDetailsPage.HtmlStyleNames.STATISTICS_COUNT.toString() + "          { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
+                "       tr#" + TestRunDetailsPage.HtmlStyleNames.STATISTICS_HEADER_ROW.toString() + "          { background-color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; color: " + UxColors.WHITE.getHtmlColorCode() + "; text-aligned: left; }" + LF +
+                "       table." + TestRunDetailsPage.HtmlStyleNames.STRIPED_ROWS.toString() + "                                    { background-color: " + UxColors.MID_GREY.getHtmlColorCode() + "; text-align: left; }" + LF +
+                "       tr.testcasesummaryheadline                                     { background-color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; color: " + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
+                "       table." + TestRunDetailsPage.HtmlStyleNames.STRIPED_ROWS.toString() + " tr:nth-child(even)                 { background-color: " + UxColors.LIGHT_GREY.getHtmlColorCode() + "; }" + LF +
+                "       .noerrorsexclamtaion    { color: black; font-weight: bold; }" + LF +
+                "       h3#settingsheading      { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
+                "       table.settingsTable     { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; font-size: 80%; }" + LF +
                 "      table#" + HtmlStyleNames.STATISTICS.toString() + "                           { background-color: " + UxColors.WHITE.getHtmlColorCode() +"; border-collapse: collapse; border: 1p solid " + UxColors.DARK_GREY.getHtmlColorCode() + "; width: " + barWidthInPixels + "px; }" + LF +
                 "      ." + TestCase.ResultStatus.FAILED_WITH_ONLY_KNOWN_ERRORS.toString() + "             { color: " + UxColors.DARK_YELLOW.getHtmlColorCode() + "; }" + LF +
                 "      ." + TestCase.ResultStatus.PASSED.toString() + "                                    { color: " + UxColors.GREEN.getHtmlColorCode() + "; }" + LF +
@@ -208,11 +219,7 @@ public class TestRunDetailsPage {
                 "       .noerrorsexclamtaion    { color: black; font-weight: bold; }" + LF +
                 "       h3#settingsheading      { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; }" + LF +
                 "       table.settingsTable     { color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; font-size: 80%; }" + LF +
-                "      a." + HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + "      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: none; }" + LF +
-                "      a." + HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":visited      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: none; }" + LF +
-                "      a." + HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":hover      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: underline; }" + LF +
-                resultsBarStyleInfo +
-                "    </style>" + LF + LF;
+                resultsBarStyleInfo;
     }
 
     /**
@@ -234,14 +241,9 @@ public class TestRunDetailsPage {
             resultBarHtml = resultsGraphBar(); //Must be created before CSS Style info. Used in statistics section
             html.append("<!DOCTYPE html>").append(LF);
             html.append("<html>").append(LF).append(LF);
-            html.append("  <HEAD>").append(LF).append(LF);
-            html.append("    <title>Test summary</title>").append(LF);
-            //html.append("    <link href=\"https://fonts.googleapis.com/css?family=Roboto:300\" rel=\"stylesheet\">").append(LF);
-            html.append("    <link rel=\"shortcut icon\" href=\"http://46.101.193.212/TAF/images/facicon.png\">").append(LF);
-            html.append("    <meta charset=\"UTF-8\">").append(LF);
-            html.append("    <meta name=\"description\" content=\"Summary result for test run\">").append(LF);
-            html.append(     htmlElementStyles());
-            html.append("  </HEAD>").append(LF).append(LF);
+            html.append("  <head>").append(LF).append(LF);
+            html.append(CommonSections.headSection("", htmlElementStyles(), "<title>Test summary</title>")).append(System.lineSeparator());
+            html.append("  </head>").append(LF).append(LF);
             html.append("  <body>").append(LF).append(LF);
             html.append("    <table id=\"").append(HtmlStyleNames.CONTENT.toString()).append("\">").append(LF).append(LF);
             html.append("      <tr>").append(LF);
@@ -281,7 +283,7 @@ public class TestRunDetailsPage {
         if(object.getRunStartTime() != null && object.getRunStopTime() != null){
             timeDuration = StringManagement.timeDurationAsString(object.getRunStartTime(), object.getRunStopTime());
         }
-        String returnString = "          <img class=\"toplogo\" src=\"" + TestRun.getSettingsValue(Settings.SettingParameters.PATH_TO_LOGO) + "\">" + LF +
+        String returnString = CommonSections.pageHeader() + LF +
                 "          <h1>Test run report</h1>" + LF +
                 "          <table class=\"rundetails\">" + LF +
                 "             <tr><td>Run name: </td><td>" + getRunName() + "</td></tr>" + LF +
@@ -389,11 +391,8 @@ public class TestRunDetailsPage {
                         }
                     }
                     if(!alreadyReported){
-                        String link = testCase.pathToHtmlLog;
-                        if(link.replace("\\", "/").toLowerCase().startsWith("smb://"))
-                            link = link.replace("\\", "/").substring(6);
                         idsOfTestCases.add(testCase.uid.toString());
-                        html.append("                <li class=\"").append(HtmlStyleNames.HOVERABLE.toString()).append("\">").append(testCase.testSetName).append(": ").append(testCase.testName).append(" (<a href=\"" + TestRun.reportLinkPrefix() + "://").append(link).append("\" target=\"_blank\">Log</a>)</li>").append(LF);
+                        html.append("                <li class=\"").append(HtmlStyleNames.HOVERABLE.toString()).append("\">").append(testCase.testSetName).append(": ").append(testCase.testName).append(" (<a href=\"taf" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseList.getIdFor(testCase.toJson())).append("\" target=\"_blank\">Log</a>)</li>").append(LF);
                     }
                 }
                 html.append("              </ul>").append(LF);
@@ -446,8 +445,8 @@ public class TestRunDetailsPage {
     }
 
     /**
-     * Produces a document footer for the summary reportTestRun.
-     * @return HTML section for footer
+     * Produces a document pageFooter for the summary reportTestRun.
+     * @return HTML section for pageFooter
      */
     private String htmlElementCopyright(){
         //noinspection deprecation
@@ -511,10 +510,7 @@ public class TestRunDetailsPage {
         StringBuilder html = new StringBuilder();
         for(NewErrorInfo newErrorInfo : newErrorInfos){
             html.append("          <p>").append(LF);
-            String link = newErrorInfo.testCase.pathToHtmlLog;
-            if(link.replace("\\", "/").toLowerCase().startsWith("smb://"))
-                link = link.replace("\\", "/").substring(6);
-            html.append("            <b>").append(newErrorInfo.testCase.testSetName).append(": ").append(newErrorInfo.testCase.testName).append("</b>(<a href=\"" + TestRun.reportLinkPrefix() + "://").append(link).append("\" target=\"_blank\">Log</a>)<br>").append(LF);
+            html.append("            <b>").append(newErrorInfo.testCase.testSetName).append(": ").append(newErrorInfo.testCase.testName).append("</b>(<a href=\"taf/" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseList.getIdFor(newErrorInfo.testCase.toJson())).append("\" target=\"_blank\">Log</a>)<br>").append(LF);
             for(LogPost logRow : newErrorInfo.logEntries){
                 html.append("            ").append(logRow.logLevel.toString()).append(": ").append(logRow.message).append("<br>").append(LF);
             }

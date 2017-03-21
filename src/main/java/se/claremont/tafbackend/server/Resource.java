@@ -5,9 +5,7 @@ import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.storage.TestCaseList;
 import se.claremont.tafbackend.storage.TestRunList;
-import se.claremont.tafbackend.webpages.LandingPage;
-import se.claremont.tafbackend.webpages.SupportMethods;
-import se.claremont.tafbackend.webpages.TestRunListingsPage;
+import se.claremont.tafbackend.webpages.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,7 +22,7 @@ public class Resource {
     @Produces(MediaType.TEXT_HTML)
     public String versionHtml() {
         System.out.println("Got a request for version.");
-        return SupportMethods.toHtmlPage("TAF Backend code version 0.1.<br><br>Try a GET request to <i>'/apiversion'</i> for supported API version.");
+        return InfoPage.toHtml("<p>TAF Backend code version 0.1.<br><br>Try a GET request to <i>'/apiversion'</i> for supported API version.</p>");
     }
 
     //GET /taf/version
@@ -41,7 +39,15 @@ public class Resource {
     @Path("apiversion")
     @Produces(MediaType.TEXT_HTML)
     public String apiVersion() {
-        return SupportMethods.toHtmlPage("TAF Backend server REST API version: <i>'v1'</i>.");
+        return InfoPage.toHtml("<p>TAF Backend server REST API version: <i>'" + Settings.currentApiVersion + "'</i>.</p>");
+    }
+
+    //GET /taf/version
+    @GET
+    @Path("about")
+    @Produces(MediaType.TEXT_HTML)
+    public String about() {
+        return InfoPage.toHtml("<h1>TAF Backend server</h1><p>This server is meant to ease storage and viewing of test runs performed from TAF.</p><p><a href=\"taf/version\">Software version</a></p><p><a href=\"taf/apiversion\">Implemented API version</a></p>");
     }
 
     //GET /taf/version
@@ -49,7 +55,7 @@ public class Resource {
     @Path("apiversion")
     @Produces(MediaType.TEXT_PLAIN)
     public String apiVersionText() {
-        return "TAF Backend server REST API version: 'v1'.";
+        return "TAF Backend server REST API version: '" + Settings.currentApiVersion + "'.";
     }
 
     @GET
@@ -137,7 +143,7 @@ public class Resource {
     @Produces(MediaType.TEXT_HTML)
     public String testCaseGetHtmlMethod(@PathParam("var") String testCaseId) {
         String html = new TestCaseMapper(TestCaseList.getItemAt(Integer.valueOf(testCaseId))).toHtml();
-        if(html == null) html = SupportMethods.toHtmlPage("Could not find test case " + testCaseId);
+        if(html == null) html = ErrorPage.toHtml("<p>Could not find test case " + testCaseId + ".</p><p>Test case info are stored with test runs and temporary id's are created at runtime. Try going through the test run again, and you'll probably find it works better. </p>");
         return html;
     }
 

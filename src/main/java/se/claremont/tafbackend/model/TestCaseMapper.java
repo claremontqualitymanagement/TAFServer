@@ -3,6 +3,7 @@ package se.claremont.tafbackend.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.tafbackend.storage.TestCaseList;
+import se.claremont.tafbackend.webpages.ErrorPage;
 import se.claremont.tafbackend.webpages.SupportMethods;
 import se.claremont.tafbackend.webpages.TestCasePage;
 
@@ -42,7 +43,7 @@ public class TestCaseMapper {
 
     public String toHtml(){
         TestCase testCaseObject = object();
-        if(testCaseObject == null) return SupportMethods.toHtmlPage("Error. Cannot create HTML page from null TestCase element.");
+        if(testCaseObject == null) return ErrorPage.toHtml("<p>Error: Cannot create HTML page from null TestCase element.</p>");
         TestCasePage testCasePage = new TestCasePage(testCaseObject);
         return testCasePage.asHtml();
     }

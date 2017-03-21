@@ -25,7 +25,7 @@ public class SupportMethods {
     public static String toHtmlPage(String contentToBeBuffered){
         return "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
-                "    <head>\n" + CommonSections.headSection() +
+                "    <head>\n" + CommonSections.headSection("", "", "") +
                 "    </head>\n" +
                 "    <body>\n" + contentToBeBuffered +
                 "  </body>\n" +

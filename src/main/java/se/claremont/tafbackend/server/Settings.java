@@ -8,4 +8,5 @@ import java.io.File;
 public class Settings {
     public static int port = 80;
     public static File storageFile = new File("TafBackend.db");
+    public static String currentApiVersion = "v1";
 }
