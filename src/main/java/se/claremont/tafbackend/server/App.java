@@ -26,7 +26,7 @@ public class App {
                 "The 'store' parameter states what file to store test run information in." + System.lineSeparator() +
                 "The name or file extension for the store file are irrelevant." + System.lineSeparator() + System.lineSeparator() +
                 "Default TCP port is 80." + System.lineSeparator() +
-                "Default storage file is 'TafBackend.db' in the same folder as this jar file." + System.lineSeparator() + System.lineSeparator();
+                "Default storage file is 'TafBackend.db' in the same folder as this jar file." + System.lineSeparator();
     }
 
     private static void setPortIfStatedAsParameter(String[] args){
@@ -34,7 +34,7 @@ public class App {
             if(arg.contains("=")){
                 if(arg.split("=")[0].toLowerCase().equals("port")){
                     Integer port = Integer.valueOf(arg.split("=")[1]);
-                    System.out.println("Setting server port to " + port + "." + System.lineSeparator());
+                    System.out.println("Setting server port to " + port + ".");
                     Settings.port = port;
                 }
             }
@@ -65,9 +65,15 @@ public class App {
         setPortIfStatedAsParameter(args);
         setStoreFileIfStatedAsParameter(args);
         HttpServer server = new HttpServer();
-        System.out.println("Starting server." + System.lineSeparator());
         server.start();
-        System.out.println(System.lineSeparator() + "Server started." + System.lineSeparator());
+        if(!server.isStarted()) {
+            try {
+                server.server.stop();
+            } catch (Exception ignored) {
+            }
+            server.server.destroy();
+            return;
+        }
 
         try {
             server.server.join();
@@ -75,7 +81,6 @@ public class App {
             System.out.println(e.toString());
         } finally {
             server.stop();
-            System.out.println("Server stopped." + System.lineSeparator());
         }
     }
 }

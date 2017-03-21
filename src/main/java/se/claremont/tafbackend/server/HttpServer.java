@@ -21,6 +21,7 @@ public class HttpServer {
     Server server;
 
     public void start(){
+        System.out.println(System.lineSeparator() + "Starting TAF Backend Server at port " + Settings.port + "." + System.lineSeparator());
         config.packages("se.claremont.tafbackend");
         ServletHolder servlet = new ServletHolder(new ServletContainer(config));
         server = new Server(Settings.port);
@@ -29,7 +30,12 @@ public class HttpServer {
         try {
             server.start();
         }catch (Exception e){
-            System.out.println(e.toString());
+            System.out.println(System.lineSeparator() + e.toString());
+        }
+        if(isStarted()){
+            System.out.println(System.lineSeparator() + "Server started." + System.lineSeparator());
+        } else {
+            System.out.println(System.lineSeparator() + "Could not start server." + System.lineSeparator());
         }
         TestRunList.loadTestRunsFromFile();
     }
@@ -46,6 +52,7 @@ public class HttpServer {
         try{
             server.stop();
             server.destroy();
+            System.out.println("Server stopped." + System.lineSeparator());
         }catch (Exception e){
             System.out.println("Error stopping HTTP server: " + e.toString());
         }

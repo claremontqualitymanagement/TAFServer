@@ -59,13 +59,13 @@ public class TestRunListingsPage {
 
     private String getRunName(int index){
         if(object == null) return "<i>unknown</i>";
-        return "<a href=\"testrun/" + String.valueOf(index) + "\" target=\"_blank\">TestRun: '" + object.getTestRunName() + "'</a>";
+        return "<a href=\"testrun/" + String.valueOf(index) + "\" target=\"_blank\">TestRun: '" + object.testRunName + "'</a>";
 
     }
 
     private String getStartTime(){
         if(object != null && object.getRunStartTime() != null){
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:SS").format(object.getRunStartTime());
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStartTime());
         } else {
             return "<i>unknown</i>";
         }
@@ -73,7 +73,7 @@ public class TestRunListingsPage {
 
     private String getStopTime(){
         if(object != null && object.getRunStopTime() != null){
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:SS").format(object.getRunStopTime());
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStopTime());
         } else {
             return "<i>unknown</i>";
         }

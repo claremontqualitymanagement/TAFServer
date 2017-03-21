@@ -284,7 +284,7 @@ public class TestRunDetailsPage {
         String returnString = "          <img class=\"toplogo\" src=\"" + TestRun.getSettingsValue(Settings.SettingParameters.PATH_TO_LOGO) + "\">" + LF +
                 "          <h1>Test run report</h1>" + LF +
                 "          <table class=\"rundetails\">" + LF +
-                "             <tr><td>Run name: </td><td>" + TestRun.testRunName + "</td></tr>" + LF +
+                "             <tr><td>Run name: </td><td>" + getRunName() + "</td></tr>" + LF +
                 "             <tr><td>Start time: </td><td>" + getStartTime() + "</td></tr>" + LF +
                 "             <tr><td>Stop time :</td><td>" + getStopTime() + "</td></tr>" + LF;
         if(timeDuration != null){
@@ -293,9 +293,19 @@ public class TestRunDetailsPage {
         return  returnString + "          </table>" + LF;
     }
 
+    private String getRunName(){
+        if(object != null){
+            if(object.testRunName != null && object.testRunName.length() > 0) return object.testRunName;
+            object.setTestRunName();
+            return object.testRunName;
+        } else {
+            return "<i>unknown</i>";
+        }
+    }
+
     private String getStartTime(){
         if(object != null && object.getRunStartTime() != null){
-            return new SimpleDateFormat("yyyyMMdd HH:mm:SS").format(object.getRunStartTime());
+            return new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(object.getRunStartTime());
         } else {
             return "<i>unknown</i>";
         }
@@ -303,7 +313,7 @@ public class TestRunDetailsPage {
 
     private String getStopTime(){
         if(object != null && object.getRunStopTime() != null){
-            return new SimpleDateFormat("yyyyMMdd HH:mm:SS").format(object.getRunStopTime());
+            return new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(object.getRunStopTime());
         } else {
             return "<i>unknown</i>";
         }
