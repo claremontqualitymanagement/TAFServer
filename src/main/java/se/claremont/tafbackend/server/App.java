@@ -25,10 +25,12 @@ public class App {
         return System.lineSeparator() +
                 "TAF Backend Server" + System.lineSeparator() +
                 "======================" + System.lineSeparator() +
-                "Usage example: 'java -jar TafBackend.jar port=8080'" + System.lineSeparator() +
+                "Usage example: 'java -jar TafBackend.jar port=8080 store=C:\\temp\\TafBackend.db'" + System.lineSeparator() +
                 "where port number is the web server port number for the server to enable access to:" + System.lineSeparator() + System.lineSeparator() +
                 "http://localhost:8080/taf" + System.lineSeparator() + System.lineSeparator() +
-                "Default value is port=80" + System.lineSeparator() + System.lineSeparator();
+                "Default value is port=80" + System.lineSeparator() + System.lineSeparator() +
+                "TAF Backend Server uses a file based data storage." +
+                "The 'store' parameter states what file to store test run information in.";
     }
 
     private static void setPortIfStatedAsParameter(String[] args){
