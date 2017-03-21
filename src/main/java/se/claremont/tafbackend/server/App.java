@@ -7,6 +7,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 
 /**
@@ -42,6 +43,18 @@ public class App {
         }
     }
 
+    private static void setStoreFileIfStatedAsParameter(String[] args){
+        for(String arg : args){
+            if(arg.contains("=")){
+                if(arg.split("=")[0].toLowerCase().equals("store")){
+                    String fileName = arg.split("=")[1];
+                    System.out.println("Setting store file to " + fileName + "." + System.lineSeparator());
+                    Settings.storageFile = new File(fileName);
+                }
+            }
+        }
+    }
+
     private static void redirectConsoleOutput(){
         testOutputChannel = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOutputChannel));
@@ -52,18 +65,11 @@ public class App {
         //originalOutputChannel = System.out;
         System.out.println(helpText());
         setPortIfStatedAsParameter(args);
-        Settings.port = 2222;
+        setStoreFileIfStatedAsParameter(args);
         HttpServer server = new HttpServer();
         System.out.println("Starting server." + System.lineSeparator());
-        //redirectConsoleOutput();
         server.start();
-        /*
-        restoreOutputChannel();
-        if(!server.isStarted()){
-            System.out.println(testOutputChannel.toString());
-        } else { */
-            System.out.println(System.lineSeparator() + "Server started." + System.lineSeparator());
-        //}
+        System.out.println(System.lineSeparator() + "Server started." + System.lineSeparator());
 
         try {
             server.server.join();
