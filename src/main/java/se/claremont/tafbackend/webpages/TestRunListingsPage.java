@@ -3,7 +3,6 @@ package se.claremont.tafbackend.webpages;
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
 import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.storage.TestRunList;
-import sun.plugin.com.event.COMEventHandler;
 
 import java.text.SimpleDateFormat;
 

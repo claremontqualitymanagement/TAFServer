@@ -1,11 +1,5 @@
 package se.claremont.tafbackend.server;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.servlet.ServletContainer;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -27,10 +21,12 @@ public class App {
                 "======================" + System.lineSeparator() +
                 "Usage example: 'java -jar TafBackend.jar port=8080 store=C:\\temp\\TafBackend.db'" + System.lineSeparator() +
                 "where port number is the web server port number for the server to enable access to:" + System.lineSeparator() + System.lineSeparator() +
-                "http://localhost:8080/taf" + System.lineSeparator() + System.lineSeparator() +
-                "Default value is port=80" + System.lineSeparator() + System.lineSeparator() +
-                "TAF Backend Server uses a file based data storage." +
-                "The 'store' parameter states what file to store test run information in.";
+                "http://localhost:8080/taf" + System.lineSeparator() +
+                "TAF Backend Server uses a file based data storage." + System.lineSeparator() +
+                "The 'store' parameter states what file to store test run information in." + System.lineSeparator() +
+                "The name or file extension for the store file are irrelevant." + System.lineSeparator() + System.lineSeparator() +
+                "Default TCP port is 80." + System.lineSeparator() +
+                "Default storage file is 'TafBackend.db' in the same folder as this jar file." + System.lineSeparator() + System.lineSeparator();
     }
 
     private static void setPortIfStatedAsParameter(String[] args){

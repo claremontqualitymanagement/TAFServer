@@ -11,8 +11,8 @@ import se.claremont.autotest.restsupport.RestResponse;
 import se.claremont.autotest.restsupport.RestSupport;
 import se.claremont.tafbackend.server.HttpServer;
 import se.claremont.tafbackend.server.Settings;
-import se.claremont.tafbackend.storage.TestCaseList;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +32,8 @@ public class RestTest {
     @BeforeClass
     public static void classSetup(){
         Settings.port = testServerPort;
-        originalTestCaseListing = TestCaseList.jsonStringList;
-        TestCaseList.jsonStringList = new ArrayList<>();
         server = new HttpServer();
+        server.setToTestMode();
         server.start();
     }
 
@@ -47,7 +46,6 @@ public class RestTest {
     @AfterClass
     public static void classTeardown(){
         server.stop();
-        TestCaseList.jsonStringList = originalTestCaseListing;
     }
 
     @Test

@@ -1,5 +1,6 @@
 package se.claremont.tafbackend.storage;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.tafbackend.server.Settings;
@@ -13,8 +14,10 @@ import java.util.List;
  *
  * Created by jordam on 2017-03-19.
  */
+@JsonIgnoreProperties({"testMode"})
 public class TestRunList {
     @JsonProperty private static List<String> jsonStringList = new ArrayList<>();
+    static boolean testMode = false;
 
     public static void addIfNotAdded(String jsonString){
         for(String json : jsonStringList){
@@ -24,7 +27,13 @@ public class TestRunList {
         saveTestRunsToFile();
     }
 
+    public static void setToTestMode(){
+        testMode = true;
+        jsonStringList = new ArrayList<>();
+    }
+
     private static void saveTestRunsToFile() {
+        if(testMode)return;
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writeValue(Settings.storageFile, TestRunList.jsonStringList);
@@ -33,11 +42,12 @@ public class TestRunList {
         };
     }
     public static void loadTestRunsFromFile() {
+        if(testMode)return;
         ObjectMapper mapper = new ObjectMapper();
         try {
             TestRunList.jsonStringList = mapper.readValue(Settings.storageFile, TestRunList.jsonStringList.getClass());
         } catch (IOException e) {
-            System.out.println(e.toString());
+            System.out.println("Storage file for test run information not found. It will be created when the first test run is registered.");
         };
     }
 

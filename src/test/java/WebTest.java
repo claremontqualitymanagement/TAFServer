@@ -3,10 +3,6 @@ import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.autotest.restsupport.RestSupport;
 import se.claremont.tafbackend.server.HttpServer;
 import se.claremont.tafbackend.server.Settings;
-import se.claremont.tafbackend.storage.TestCaseList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jordam on 2017-03-19.
@@ -14,7 +10,6 @@ import java.util.List;
 public class WebTest {
     RestSupport restSupport;
     TestCase currentTestCase;
-    static List<String> originalTestCsaeListing;
     static HttpServer server;
     static int testServerPort = 2222;
     static String testServerPortAsString = String.valueOf(testServerPort);
@@ -22,16 +17,14 @@ public class WebTest {
     @BeforeClass
     public static void classSetup(){
         Settings.port = testServerPort;
-        originalTestCsaeListing = TestCaseList.jsonStringList;
-        TestCaseList.jsonStringList = new ArrayList<>();
         server = new HttpServer();
+        server.setToTestMode();
         server.start();
     }
 
     @AfterClass
     public static void classTeardown(){
         server.stop();
-        TestCaseList.jsonStringList = originalTestCsaeListing;
     }
     @Before
     public void startup(){

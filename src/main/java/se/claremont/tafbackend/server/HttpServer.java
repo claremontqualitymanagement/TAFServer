@@ -34,6 +34,10 @@ public class HttpServer {
         TestRunList.loadTestRunsFromFile();
     }
 
+    public void setToTestMode(){
+        TestRunList.setToTestMode();
+    }
+
     public boolean isStarted(){
         return (server != null && !server.isFailed());
     }
