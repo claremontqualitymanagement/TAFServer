@@ -3,7 +3,7 @@ package se.claremont.tafbackend.server;
 import se.claremont.tafbackend.model.LogPostMapper;
 import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestRunMapper;
-import se.claremont.tafbackend.storage.TestCaseList;
+import se.claremont.tafbackend.storage.TestCaseCacheList;
 import se.claremont.tafbackend.storage.TestRunList;
 import se.claremont.tafbackend.webpages.*;
 
@@ -62,7 +62,7 @@ public class Resource {
     @Path("v1/testcases")
     @Produces(MediaType.APPLICATION_JSON)
     public String testCases() {
-        return String.join(System.lineSeparator(), TestCaseList.getAll());
+        return String.join(System.lineSeparator(), TestCaseCacheList.getAll());
     }
 
     @GET
@@ -109,7 +109,7 @@ public class Resource {
     @Path("v1/testcase/{var}")
     @Produces(MediaType.APPLICATION_JSON)
     public String testCaseGetMethod(@PathParam("var") String testCaseId) {
-        return TestCaseList.getItemAt(Integer.valueOf(testCaseId));
+        return TestCaseCacheList.getItemAt(Integer.valueOf(testCaseId));
     }
 
     /*
@@ -135,6 +135,18 @@ public class Resource {
     }
 
     /*
+In this case out value will be assigned to ".../{var}", which is of type String in this example.
+By typing http://localhost:2222/home/path/Me this method will return "Hello, Me" to the browser.
+ */
+    @DELETE
+    @Path("v1/testrun/{var}")
+    @Produces(MediaType.TEXT_HTML)
+    public String testRunDeleteMethod(@PathParam("var") String testRunId) {
+        return TestRunList.tryDelete(testRunId);
+    }
+
+
+    /*
     In this case out value will be assigned to ".../{var}", which is of type String in this example.
     By typing http://localhost:2222/home/path/Me this method will return "Hello, Me" to the browser.
      */
@@ -142,7 +154,7 @@ public class Resource {
     @Path("v1/testcase/{var}")
     @Produces(MediaType.TEXT_HTML)
     public String testCaseGetHtmlMethod(@PathParam("var") String testCaseId) {
-        String html = new TestCaseMapper(TestCaseList.getItemAt(Integer.valueOf(testCaseId))).toHtml();
+        String html = new TestCaseMapper(TestCaseCacheList.getItemAt(Integer.valueOf(testCaseId))).toHtml();
         if(html == null) html = ErrorPage.toHtml("<p>Could not find test case " + testCaseId + ".</p><p>Test case info are stored with test runs and temporary id's are created at runtime. Try going through the test run again, and you'll probably find it works better. </p>");
         return html;
     }

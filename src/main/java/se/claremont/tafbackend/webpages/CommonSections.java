@@ -22,6 +22,7 @@ public class CommonSections {
         sb.append("      <link rel=\"shortcut icon\" href=\"http://46.101.193.212/TAF/images/facicon.png\">").append(LF);
         sb.append("      <title>TAF Server</title>").append(System.lineSeparator());
         sb.append("      <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>").append(LF);
+        sb.append("      <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">").append(LF);
         sb.append("      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>").append(System.lineSeparator());
         sb.append("      <style>").append(System.lineSeparator());
         sb.append(CommonSections.styles(extraStyles));
@@ -66,7 +67,7 @@ public class CommonSections {
         StringBuilder sb = new StringBuilder();
         sb.append("<a href=\"http://www.claremont.se\"><img class=\"toplogo\" src=\"http://46.101.193.212/TAF/images/claremontlogo.gif\"></a>").append(System.lineSeparator());
         sb.append("<div class=\"topmenu\">");
-        sb.append("<a href=\"taf\"><span class=\"topmenuelement\">Start</span></a>");
+        sb.append("<a href=\"taf\"><span class=\"topmenuelement\"><i class=\"fa fa-home\"></i> Start</span></a>");
         sb.append("<a href=\"taf/").append(se.claremont.tafbackend.server.Settings.currentApiVersion).append("/testruns\"><span class=\"topmenuelement\">Test run listing</span></a>");
         sb.append("<a href=\"taf/about\"><span class=\"topmenuelement\">About</span></a>");
         sb.append("</div>").append(System.lineSeparator());

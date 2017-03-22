@@ -12,6 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.9.0" level="project" />
+    <orderEntry type="library" name="TafFull-2.5.19" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:9.4.2.v20170220" level="project" />
@@ -56,8 +57,8 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement:TestAutomationFramework:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:Core:2.5.18" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement:TestAutomationFramework:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:Core:2.5.20" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: jcifs:jcifs:1.3.17" level="project" />
@@ -93,7 +94,7 @@
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.8" level="project" />
     <orderEntry type="library" name="Maven: commons-validator:commons-validator:1.3.1" level="project" />
     <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TafFull:2.5.18" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TafFull:2.5.20" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: io.github.bonigarcia:webdrivermanager:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
@@ -145,11 +146,11 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.sf.proguard:proguard-base:5.3.2" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TechnologiesSupport:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityJavaGui:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityJson:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityRestApi:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilitySmartImageGui:2.5.18" level="project" />
-    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityWeb:2.5.18" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TechnologiesSupport:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityJavaGui:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityJson:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityRestApi:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilitySmartImageGui:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.github.claremontqualitymanagement.TestAutomationFramework:TestingCapabilityWeb:2.5.20" level="project" />
   </component>
 </module>

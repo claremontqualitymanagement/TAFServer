@@ -8,7 +8,8 @@ import java.util.List;
  *
  * Created by jordam on 2017-03-19.
  */
-public class TestCaseList {
+//Todo could benefit from being turned into a more permanent test case storage. Currently only a cache mechanism
+public class TestCaseCacheList { //Only used for caching. Order is irrelevant.
     public static List<String> jsonStringList = new ArrayList<>();
 
     public static void addIfNotAdded(String testCaseMapperTestCaseString){
@@ -16,6 +17,10 @@ public class TestCaseList {
             if(json.equals(testCaseMapperTestCaseString)) return;
         }
         jsonStringList.add(testCaseMapperTestCaseString);
+    }
+
+    public static void emptyCache(){
+        jsonStringList = new ArrayList<>();
     }
 
     public static int getIdFor(String jsonString){

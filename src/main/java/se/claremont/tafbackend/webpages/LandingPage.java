@@ -2,7 +2,7 @@ package se.claremont.tafbackend.webpages;
 
 import se.claremont.autotest.common.reporting.UxColors;
 import se.claremont.tafbackend.server.Settings;
-import se.claremont.tafbackend.storage.TestCaseList;
+import se.claremont.tafbackend.storage.TestCaseCacheList;
 import se.claremont.tafbackend.storage.TestRunList;
 
 /**
@@ -25,7 +25,7 @@ public class LandingPage {
         sb.append("      <h1>TAF Results HttpServer</h1>").append(System.lineSeparator());
         sb.append("      <table class=\"statistics\">").append(System.lineSeparator());
         sb.append("         <tr><td>Number of test runs registered:</td><td>").append(TestRunList.size()).append("</td></tr>").append(System.lineSeparator());
-        sb.append("         <tr><td>Number of test cases treated since last restart:</td><td>").append(TestCaseList.size()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Number of test cases treated since last restart:</td><td>").append(TestCaseCacheList.size()).append("</td></tr>").append(System.lineSeparator());
         sb.append("      </table>").append(System.lineSeparator());
         sb.append("      <p>").append(System.lineSeparator());
         if(TestRunList.size() > 0){

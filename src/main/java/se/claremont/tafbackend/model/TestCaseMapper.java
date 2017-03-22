@@ -2,9 +2,8 @@ package se.claremont.tafbackend.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.testcase.TestCase;
-import se.claremont.tafbackend.storage.TestCaseList;
+import se.claremont.tafbackend.storage.TestCaseCacheList;
 import se.claremont.tafbackend.webpages.ErrorPage;
-import se.claremont.tafbackend.webpages.SupportMethods;
 import se.claremont.tafbackend.webpages.TestCasePage;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class TestCaseMapper {
 
     public void store(){
         if(testCase == null) return;
-        TestCaseList.addIfNotAdded(testCase);
+        TestCaseCacheList.addIfNotAdded(testCase);
         System.out.println("Saving test case.");
     }
 

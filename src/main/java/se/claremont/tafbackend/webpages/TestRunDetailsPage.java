@@ -7,12 +7,11 @@ import se.claremont.autotest.common.reporting.testcasereports.TestCaseLogReporte
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
 import se.claremont.autotest.common.support.*;
 import se.claremont.autotest.common.testcase.TestCase;
-import se.claremont.autotest.common.testrun.Settings;
 import se.claremont.autotest.common.testrun.TestRun;
 import se.claremont.autotest.common.testset.TestSet;
 import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestSetMapper;
-import se.claremont.tafbackend.storage.TestCaseList;
+import se.claremont.tafbackend.storage.TestCaseCacheList;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,8 +45,8 @@ public class TestRunDetailsPage {
         }
         for(int i = 0; i < testRunResult.getTestCasesJsonsList().size(); i++){
             String testCaseJson = testRunResult.getTestCasesJsonsList().get(i);
-            TestCaseList.addIfNotAdded(testCaseJson);
-            evaluateTestCase(new TestCaseMapper(testCaseJson).object(), TestCaseList.getIdFor(testCaseJson));
+            TestCaseCacheList.addIfNotAdded(testCaseJson);
+            evaluateTestCase(new TestCaseMapper(testCaseJson).object(), TestCaseCacheList.getIdFor(testCaseJson));
         }
     }
 
@@ -392,7 +391,7 @@ public class TestRunDetailsPage {
                     }
                     if(!alreadyReported){
                         idsOfTestCases.add(testCase.uid.toString());
-                        html.append("                <li class=\"").append(HtmlStyleNames.HOVERABLE.toString()).append("\">").append(testCase.testSetName).append(": ").append(testCase.testName).append(" (<a href=\"taf" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseList.getIdFor(testCase.toJson())).append("\" target=\"_blank\">Log</a>)</li>").append(LF);
+                        html.append("                <li class=\"").append(HtmlStyleNames.HOVERABLE.toString()).append("\">").append(testCase.testSetName).append(": ").append(testCase.testName).append(" (<a href=\"taf" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseCacheList.getIdFor(testCase.toJson())).append("\" target=\"_blank\">Log</a>)</li>").append(LF);
                     }
                 }
                 html.append("              </ul>").append(LF);
@@ -510,7 +509,7 @@ public class TestRunDetailsPage {
         StringBuilder html = new StringBuilder();
         for(NewErrorInfo newErrorInfo : newErrorInfos){
             html.append("          <p>").append(LF);
-            html.append("            <b>").append(newErrorInfo.testCase.testSetName).append(": ").append(newErrorInfo.testCase.testName).append("</b>(<a href=\"taf/" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseList.getIdFor(newErrorInfo.testCase.toJson())).append("\" target=\"_blank\">Log</a>)<br>").append(LF);
+            html.append("            <b>").append(newErrorInfo.testCase.testSetName).append(": ").append(newErrorInfo.testCase.testName).append("</b>(<a href=\"taf/" + se.claremont.tafbackend.server.Settings.currentApiVersion + "/testcase/" + TestCaseCacheList.getIdFor(newErrorInfo.testCase.toJson())).append("\" target=\"_blank\">Log</a>)<br>").append(LF);
             for(LogPost logRow : newErrorInfo.logEntries){
                 html.append("            ").append(logRow.logLevel.toString()).append(": ").append(logRow.message).append("<br>").append(LF);
             }
