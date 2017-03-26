@@ -4,10 +4,10 @@
 
     <groupId>se.claremont</groupId>
     <artifactId>TafBackend</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>TafBackend</name>
-    <description>TAF Backend Server - Test Automation Framework Backend</description>
+    <description>TAF Backend Server - Test Automation Framework Backend Server for keeping track of test run results</description>
     <url>http://www.claremont.se</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
