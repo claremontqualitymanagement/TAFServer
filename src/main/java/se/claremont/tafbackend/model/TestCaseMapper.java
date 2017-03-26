@@ -7,36 +7,48 @@ import se.claremont.tafbackend.webpages.ErrorPage;
 import se.claremont.tafbackend.webpages.TestCasePage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jordam on 2017-03-18.
  */
 public class TestCaseMapper {
-    String testCase;
-
+    String testCaseJson;
+    public static Map<String, TestCase> testCaseCache = new HashMap<>();
     public TestCaseMapper(String testCase){
-        this.testCase = testCase;
+        this.testCaseJson = testCase;
     }
+    static ObjectMapper mapper = new ObjectMapper();
 
     public TestCase object(){
-        if(testCase == null) {
+        if(testCaseJson == null) {
             System.out.println("Cannot create TestCase from a json string that is null.");
             return null;
         }
-        ObjectMapper mapper = new ObjectMapper();
+        if(testCaseCache.containsKey(testCaseJson)) {
+            System.out.println("Getting test case object from cache.");
+            return testCaseCache.get(testCaseJson);
+        }
         try {
-            System.out.println("Creating TestCase object from json '" + testCase + "'.");
-            return mapper.readValue(testCase, TestCase.class);
+            System.out.print("Creating TestCase object from json: " + testCaseCache + "");
+            TestCase result = mapper.readValue(testCaseJson, TestCase.class);
+            if(result == null) {System.out.println("  => (Result: Oups! Could not create a TestCase object from json above.)");
+            } else {
+                System.out.println("  => (Result: TestCase object created successfully.)" + System.lineSeparator());
+            }
+            testCaseCache.put(testCaseJson, result);
+            return result;
         } catch (IOException e) {
-            System.out.println("Tried to create TestCase object from json:" + System.lineSeparator() + testCase + System.lineSeparator() + "Got error: " + e.toString());
+            System.out.println("Tried to create TestCase object from json:" + System.lineSeparator() + testCaseJson + System.lineSeparator() + "Got error: " + e.toString());
         }
         return null;
     }
 
 
     public void store(){
-        if(testCase == null) return;
-        TestCaseCacheList.addIfNotAdded(testCase);
+        if(testCaseJson == null) return;
+        TestCaseCacheList.addIfNotAdded(testCaseJson);
         System.out.println("Saving test case.");
     }
 

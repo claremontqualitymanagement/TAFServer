@@ -31,6 +31,7 @@ public class RestTest {
 
     @BeforeClass
     public static void classSetup(){
+        TestRun.setSettingsValue(se.claremont.autotest.common.testrun.Settings.SettingParameters.URL_TO_TAF_BACKEND, "http://anyserver:81/taf");
         Settings.port = testServerPort;
         server = new HttpServer();
         server.setToTestMode();

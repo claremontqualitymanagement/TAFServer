@@ -12,6 +12,7 @@ import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.autotest.common.testcase.TestCaseLogSection;
 import se.claremont.autotest.common.testrun.Settings;
 import se.claremont.autotest.common.testrun.TestRun;
+import se.claremont.tafbackend.statistics.StatisticsManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class TestCasePage {
     }
 
     public String asHtml(){
+        StatisticsManager.statisticsCounter.addTestCaseView();
         String html = "<!DOCTYPE html>" + LF + "<html lang=\"en\">" + LF + LF +
                 CommonSections.headSection(scriptSection(), styles(), extraHeadSections()) +
                 "  <body>" + LF + LF +

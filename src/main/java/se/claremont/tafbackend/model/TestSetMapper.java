@@ -1,6 +1,9 @@
 package se.claremont.tafbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
 import se.claremont.autotest.common.testset.TestSet;
 
 import java.io.IOException;
@@ -10,14 +13,14 @@ import java.io.IOException;
  */
 public class TestSetMapper {
     String testSet = null;
-    public TestSet testSetObject = null;
+    public TafBackendServerTestRunReporter.TafBackendServerTestSet testSetObject = null;
 
     public TestSetMapper(String testSet){
         if(testSet == null)return;
         this.testSet = testSet;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            this.testSetObject = mapper.readValue(testSet, TestSet.class);
+            this.testSetObject = mapper.readValue(testSet, TafBackendServerTestRunReporter.TafBackendServerTestSet.class);
             System.out.println(this.testSetObject.toString());
             System.out.println("Creating TestSet from '" + testSet + "'.");
         } catch (IOException e) {

@@ -1,7 +1,11 @@
 package se.claremont.tafbackend.storage;
 
+import se.claremont.autotest.common.testcase.TestCase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Storing JSON string for each test case. Use new TestCaseMapper() with that string to obtain a TestCase object.
@@ -13,6 +17,7 @@ public class TestCaseCacheList { //Only used for caching. Order is irrelevant.
     public static List<String> jsonStringList = new ArrayList<>();
 
     public static void addIfNotAdded(String testCaseMapperTestCaseString){
+        if(testCaseMapperTestCaseString == null)return;
         for(String json : jsonStringList){
             if(json.equals(testCaseMapperTestCaseString)) return;
         }

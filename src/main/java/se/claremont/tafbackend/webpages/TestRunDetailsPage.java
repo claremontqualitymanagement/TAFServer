@@ -8,9 +8,9 @@ import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTes
 import se.claremont.autotest.common.support.*;
 import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.autotest.common.testrun.TestRun;
-import se.claremont.autotest.common.testset.TestSet;
 import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestSetMapper;
+import se.claremont.tafbackend.statistics.StatisticsManager;
 import se.claremont.tafbackend.storage.TestCaseCacheList;
 
 import java.text.SimpleDateFormat;
@@ -38,19 +38,24 @@ public class TestRunDetailsPage {
 
     public TestRunDetailsPage(TafBackendServerTestRunReporter testRunResult){
         this.object = testRunResult;
-        for (String testSetJson : testRunResult.getTestSetJsonsList()){
-            TestSet testSet = new TestSetMapper(testSetJson).testSetObject;
-            if(testSet == null)continue;
-            evaluateTestSet(testSet);
-        }
-        for(int i = 0; i < testRunResult.getTestCasesJsonsList().size(); i++){
-            String testCaseJson = testRunResult.getTestCasesJsonsList().get(i);
+        for(int i = 0; i < testRunResult.testCasesJsonsList.size(); i++){
+            String testCaseJson = testRunResult.testCasesJsonsList.get(i);
+            if(testCaseJson == null){
+                System.out.println("Oups! Could not get any TestCase object json from testCaseJson with id " + i + " from getTestCaseJsonsList for test run. It was null.");
+                continue;
+            }
             TestCaseCacheList.addIfNotAdded(testCaseJson);
             evaluateTestCase(new TestCaseMapper(testCaseJson).object(), TestCaseCacheList.getIdFor(testCaseJson));
+        }
+        for (String testSetJson : testRunResult.testSetJsonsList){
+            TafBackendServerTestRunReporter.TafBackendServerTestSet testSet = new TestSetMapper(testSetJson).testSetObject;
+            if(testSet == null)continue;
+            evaluateTestSet(testSet);
         }
     }
 
     public String toHtml(){
+        StatisticsManager.statisticsCounter.addTestRunView();
         return createReport();
     }
 
@@ -59,12 +64,14 @@ public class TestRunDetailsPage {
      * @param testCase The {@link TestCase} to evaluate and addIfNotAdded to accumulated list of results for later compilation.
      */
     public void evaluateTestCase(TestCase testCase, int index){
+        if(testCase == null)return;
         appendTestCaseResultToSummary(testCase, index);
         evaluateTestCaseLocalKnownErrorsList(testCase);
         evaluateTestCaseUnknownErrors(testCase);
     }
 
     private void appendTestCaseResultToSummary(TestCase testCase, int index){
+        if(testCase == null)return;
         String link = testCase.pathToHtmlLog;
         if(link.replace("\\", "/").toLowerCase().startsWith("smb://"))
             link = link.replace("\\", "/").substring(6);
@@ -106,7 +113,7 @@ public class TestRunDetailsPage {
         }
     }
 
-    public void evaluateTestSet(TestSet testSet){
+    public void evaluateTestSet(TafBackendServerTestRunReporter.TafBackendServerTestSet testSet){
         if(testSet == null || testSet.knownErrorsList == null) return;
         for(KnownError knownError : testSet.knownErrorsList.knownErrors){
             if(knownError.encountered()){
@@ -279,8 +286,8 @@ public class TestRunDetailsPage {
      */
     private String htmlElementTitle(){
         String timeDuration = null;
-        if(object.getRunStartTime() != null && object.getRunStopTime() != null){
-            timeDuration = StringManagement.timeDurationAsString(object.getRunStartTime(), object.getRunStopTime());
+        if(object.runStartTime != null && object.runStopTime != null){
+            timeDuration = StringManagement.timeDurationAsString(object.runStartTime, object.runStopTime);
         }
         String returnString = CommonSections.pageHeader() + LF +
                 "          <h1>Test run report</h1>" + LF +
@@ -305,16 +312,16 @@ public class TestRunDetailsPage {
     }
 
     private String getStartTime(){
-        if(object != null && object.getRunStartTime() != null){
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStartTime());
+        if(object != null && object.runStartTime != null){
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.runStartTime);
         } else {
             return "<i>unknown</i>";
         }
     }
 
     private String getStopTime(){
-        if(object != null && object.getRunStopTime() != null){
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.getRunStopTime());
+        if(object != null && object.runStopTime!= null){
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(object.runStopTime);
         } else {
             return "<i>unknown</i>";
         }

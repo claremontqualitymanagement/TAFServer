@@ -36,8 +36,10 @@ public class HttpServer {
             System.out.println(System.lineSeparator() + "Server started." + System.lineSeparator());
         } else {
             System.out.println(System.lineSeparator() + "Could not start server." + System.lineSeparator());
+            return;
         }
         TestRunList.loadTestRunsFromFile();
+        System.out.println(System.lineSeparator() + "Server ready to serve." + System.lineSeparator());
     }
 
     public void setToTestMode(){

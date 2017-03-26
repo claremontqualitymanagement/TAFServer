@@ -1,9 +1,14 @@
 package se.claremont.tafbackend.webpages;
 
 import se.claremont.autotest.common.reporting.UxColors;
+import se.claremont.tafbackend.model.TestCaseMapper;
+import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.server.Settings;
+import se.claremont.tafbackend.statistics.StatisticsManager;
 import se.claremont.tafbackend.storage.TestCaseCacheList;
 import se.claremont.tafbackend.storage.TestRunList;
+
+import java.util.Date;
 
 /**
  * Created by jordam on 2017-03-18.
@@ -11,11 +16,12 @@ import se.claremont.tafbackend.storage.TestRunList;
 public class LandingPage {
 
     public static String toHtml(){
+        TestRunListingsPage testRunListingsPage = new TestRunListingsPage();
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>").append(System.lineSeparator());
         sb.append("<html lang=\"en\">").append(System.lineSeparator());
         sb.append("   <head>").append(System.lineSeparator());
-        sb.append(CommonSections.headSection(scripts(), extraStyles(), "")).append(System.lineSeparator());
+        sb.append(CommonSections.headSection(scripts(testRunListingsPage.scripts()), extraStyles(testRunListingsPage.extraStyles()), extraHeadEntrys())).append(System.lineSeparator());
         sb.append("   </head>").append(System.lineSeparator());
         sb.append("   <body>").append(System.lineSeparator());
         sb.append("    <table id=\"").append(TestRunDetailsPage.HtmlStyleNames.CONTENT.toString()).append("\">").append(LF).append(LF);
@@ -23,10 +29,8 @@ public class LandingPage {
         sb.append("        <td>").append(LF).append(LF);
         sb.append(CommonSections.pageHeader()).append(System.lineSeparator());
         sb.append("      <h1>TAF Results HttpServer</h1>").append(System.lineSeparator());
-        sb.append("      <table class=\"statistics\">").append(System.lineSeparator());
-        sb.append("         <tr><td>Number of test runs registered:</td><td>").append(TestRunList.size()).append("</td></tr>").append(System.lineSeparator());
-        sb.append("         <tr><td>Number of test cases treated since last restart:</td><td>").append(TestCaseCacheList.size()).append("</td></tr>").append(System.lineSeparator());
-        sb.append("      </table>").append(System.lineSeparator());
+        sb.append(testRunListingsPage.testRunResultListing(true, 5));
+        sb.append("<br>").append(System.lineSeparator());
         sb.append("      <p>").append(System.lineSeparator());
         if(TestRunList.size() > 0){
             sb.append("      <a href=\"taf/").append(Settings.currentApiVersion).append("/testrun/").append(TestRunList.size()-1).append("\" class=\"button purple\"><span class=\"checkmark centered\">✓</span>Latest test run</a>").append(System.lineSeparator());
@@ -37,6 +41,7 @@ public class LandingPage {
         sb.append("      <p>").append(System.lineSeparator());
         sb.append("         <a href=\"taf/").append(Settings.currentApiVersion).append("/testruns\" class=\"button purple\"><span class=\"checkmark centered\">✓</span>Test run list</a>").append(System.lineSeparator());
         sb.append("      </p>").append(System.lineSeparator());
+        sb.append(pageViewStatistics()).append(System.lineSeparator());
         sb.append("        </td>").append(LF);
         sb.append("      </tr>").append(LF).append(LF);
         sb.append("      <tr>").append(LF);
@@ -49,15 +54,40 @@ public class LandingPage {
         return sb.toString();
     }
 
+    private static String extraHeadEntrys() {
+        return "<link href=\"//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css\" rel=\"stylesheet\">" + System.lineSeparator() +
+                "<meta http-equiv=\"refresh\" content=\"60; URL=\"taf/testruns\">" + System.lineSeparator();
+    }
+
+    private static String pageViewStatistics(){
+        StringBuilder sb = new StringBuilder();
+        Date aWeekAgo = new Date();
+        aWeekAgo.setTime(aWeekAgo.getTime() - (7*24*60*60*1000));
+        Date aDayAgo = new Date();
+        aDayAgo.setTime(aDayAgo.getTime() - (24*60*60*1000));
+        sb.append("      <table class=\"statistics\">").append(System.lineSeparator());
+        sb.append("         <tr><td>Test runs viewed since last restart:</td><td>").append(StatisticsManager.statisticsCounter.numberOfRegisteredTestRunViews()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Test runs viewed last seven days:</td><td>").append(StatisticsManager.statisticsCounter.numberOfTestRunViewsSince(aWeekAgo)).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Test runs viewed last 24 hours:</td><td>").append(StatisticsManager.statisticsCounter.numberOfTestRunViewsSince(aDayAgo)).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Test cases viewed since last restart:</td><td>").append(StatisticsManager.statisticsCounter.numberOfRegisteredTestCaseViews()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Test cases viewed last seven days:</td><td>").append(StatisticsManager.statisticsCounter.numberOfTestCaseViewsSince(aWeekAgo)).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Test cases viewed last 24 hours:</td><td>").append(StatisticsManager.statisticsCounter.numberOfTestCaseViewsSince(aDayAgo)).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Number of test runs registered:</td><td>").append(TestRunList.size()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Number of test cases in cache:</td><td>").append(TestCaseMapper.testCaseCache.size()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("         <tr><td>Number of test runs in cache:</td><td>").append(TestRunMapper.testRunCache.size()).append("</td></tr>").append(System.lineSeparator());
+        sb.append("      </table>").append(System.lineSeparator());
+        return sb.toString();
+    }
+
 
     private static String LF = System.lineSeparator();
 
 
-    private static String scripts(){
-        return "";
+    private static String scripts(String scripts){
+        return scripts;
     }
 
-    private static String extraStyles(){
+    private static String extraStyles(String extraExtraStyles){
         StringBuilder sb = new StringBuilder();
         sb.append("table.statistics {}").append(System.lineSeparator());
         sb.append(".button { display: inline-block; height: 50px; line-height: 50px; padding-right: 30px; padding-left: 70px; position: relative; background-color:rgb(41,127,184); color:rgb(255,255,255); ");
@@ -102,6 +132,7 @@ public class LandingPage {
                 "}").append(System.lineSeparator());
                 sb.append(".button.purple { background: #8e44ad; }");
                 sb.append(".button.grey { background: ").append(UxColors.MID_GREY.getHtmlColorCode()).append("; }").append(System.lineSeparator());
+        sb.append(extraExtraStyles);
         return sb.toString();
     }
 

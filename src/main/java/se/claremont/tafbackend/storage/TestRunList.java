@@ -3,6 +3,9 @@ package se.claremont.tafbackend.storage;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
+import se.claremont.tafbackend.model.TestCaseMapper;
+import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.server.Settings;
 import se.claremont.tafbackend.webpages.ErrorPage;
 import se.claremont.tafbackend.webpages.InfoPage;
@@ -97,8 +100,20 @@ public class TestRunList {
         if(size() < id) return ErrorPage.toHtml("<p>Cannot delete test run with id '" + id.toString() + "'. Highest id is '" + size() + "'.</p>");
         if(id < 0) return ErrorPage.toHtml("<p>Cannot delete test run with negative id. Request for removal of test run with id '" + id + "' denied.</p>");
         String contentToRemove = jsonStringList.get(id);
+        if(contentToRemove == null){
+            System.out.println("Could not remove test run with id " + id + ".");
+        }
         System.out.println("Removing test run with id " + id + ". Removed content below: " + System.lineSeparator() + contentToRemove);
         System.out.println(jsonStringList.remove(idVerified));
+        if(TestRunMapper.testRunCache.containsKey(contentToRemove)){
+            TafBackendServerTestRunReporter testRunObject = TestRunMapper.testRunCache.get(contentToRemove);
+            for(String testCaseJson :testRunObject.testCasesJsonsList){
+                if(testCaseJson != null && TestCaseMapper.testCaseCache.containsKey(testCaseJson)){
+                    TestCaseMapper.testCaseCache.remove(testCaseJson);
+                }
+            }
+            TestRunMapper.testRunCache.remove(contentToRemove);
+        }
         System.out.println("Content for test run with id " + testRunId + " removed.");
         saveTestRunsToFile();
         //Todo: Should remove each test case in test run from cache rather than emptying cache

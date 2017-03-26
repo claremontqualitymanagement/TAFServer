@@ -254,7 +254,7 @@
         <dependency>
             <groupId>com.github.claremontqualitymanagement</groupId>
             <artifactId>TestAutomationFramework</artifactId>
-            <version>2.5.20</version>
+            <version>2.5.24</version>
         </dependency>
     </dependencies>
 

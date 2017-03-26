@@ -47,7 +47,7 @@ public class Resource {
     @Path("about")
     @Produces(MediaType.TEXT_HTML)
     public String about() {
-        return InfoPage.toHtml("<h1>TAF Backend server</h1><p>This server is meant to ease storage and viewing of test runs performed from TAF.</p><p><a href=\"taf/version\">Software version</a></p><p><a href=\"taf/apiversion\">Implemented API version</a></p>");
+        return AboutPage.toHtml();
     }
 
     //GET /taf/version
@@ -77,6 +77,20 @@ public class Resource {
     @Produces(MediaType.TEXT_HTML)
     public String testRunsAsHtml() {
         return new TestRunListingsPage().toHtml();
+    }
+
+    @GET
+    @Path("v1/testrunedit/{var}")
+    @Produces(MediaType.TEXT_HTML)
+    public String testRunEditPage(@PathParam("var") String testRunId){
+        return InfoPage.toHtml("<p>This will become the edit page for test runs.</p><p>Currently this would enable editing of test run with id " + testRunId + ", since that is what was found in this request.</p>");
+    }
+
+    @GET
+    @Path("v1/testrunemail/{var}")
+    @Produces(MediaType.TEXT_HTML)
+    public String testRunEmailPage(@PathParam("var") String testRunId){
+        return InfoPage.toHtml("<p>This will become the email form page for test runs.</p><p>Currently this would enable emailing of test run with id " + testRunId + ", since that is what was found in this request.</p>");
     }
 
     //GET /taf/
@@ -191,6 +205,7 @@ By typing http://localhost:2222/home/path/Me this method will return "Hello, Me"
         }
     }
 
+    //Should be re-name to v1/testruns for compliance? Then it needs to be updated in TAF as well - and possibly the API version updated.
     @POST
     @Path("v1/testrun")
     public String postTestRun(String testRun) {

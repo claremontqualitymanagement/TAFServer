@@ -44,7 +44,7 @@ public class CommonSections {
                 "      h1, h2                  { margin-top: 20px; margin-bottom: 10px; line-height: 1.1; font-family: inherit; }" + LF +
                 "      h1                      { font-size:24px; }" + LF +
                 "      h2                      { font-size:20px; }" + LF +
-                "      table#" + TestRunDetailsPage.HtmlStyleNames.CONTENT.toString() + "           { background-color: white ; }" + LF +
+                "      table#" + TestRunDetailsPage.HtmlStyleNames.CONTENT.toString() + "           { background-color: white ; padding: 20px; }" + LF +
                 "      table.pageFooter            { border: 0px solid " + UxColors.WHITE.getHtmlColorCode() + "; }" + LF +
                 "      .pagetitle              { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; font-size:24px; font-weight: bold; }" + LF +
                 "      .pageFooter                  { border: 0px none; width: 100%; color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-align: center; align: center; }" + LF +
