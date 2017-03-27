@@ -42,6 +42,13 @@ A thin line in the bar above each test step indicates how long time was spent in
 
 Known errors are displayed separately in this view too.
 
+# How it works
+The *TAF Backend Server* is a java program that has a built in web server that hosts a number of REST services. After a test execution with TAF the test run results are posted to a REST service in *TAF Backend Server* where it is added to statistics and stored for viewing.
+
+![TafBackendServerSchematicOverview](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendSchematicOverview.PNG "Schematic overview")
+
+The *TAF Backend Server* then hosts a web interface where statistics and test run information can be viewed.
+
 # Getting started
 ## Pre-requisites
 To ger going with the *TAF Backend Server* you must first make sure you perform the following steps:
