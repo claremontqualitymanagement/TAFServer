@@ -55,7 +55,7 @@ Contact sales@claremont.se about *TAF Backend Server*.
 
 ## Check your TAF version
 In your test automation project, open the `pom.xml` file and look for a section like
-```maven
+```pom
         <dependency>
             <groupId>com.github.claremontqualitymanagement</groupId>
             <artifactId>TestAutomationFramework</artifactId>
@@ -72,6 +72,8 @@ java -version
 ```
 When you press **enter** you'll be presented with the java version installed in your operating system. If you don't, either your java installation is not in your operating system path variable (this variable tells your operating system where to look for files when they are not in the current folder) or maybe you don't have java installed at all. Java is free of charge, and can be downloaded.
 
+Make sure your java is at least version 1.8.
+
 ## Starting the server
 The server is started as a normal Java program, from the command line. 
 
@@ -84,5 +86,35 @@ java -jar TafBackend.jar port=8080 store=C:\temp\TafBackend.db
 
 Default `port`is `80` and default storage is a filed called `TafBackend.db` in the same folder as the jar file is run from. The name or file extension for the store file are irrelevant.
 
-## Running the server
-While running the server it will continuously produce output.
+## Preparing your TAF test automation to post results to *TAF Backend Server*
+The TAF Backend Server TestRunReporter is engaged when the TAF test run setting called `URL_TO_TAF_BACKEND` is changed from its default value. There are three ways of doing this, since there are three ways of updating a run settings variable for TAF. 
+One way of doing this is from the command line when starting your TAF test run.
+
+### a). Via command line interface at test run execution
+```
+java -jar TafFull.jar MyTestClasses URL_TO_TAF_BACKEND=http://localhost:81/taf
+```
+
+Of course the address and port of your backend server should replace the `localhost:81`in the example above.
+
+### b). Programatically in your TAF tests
+Another way is programatically, by adding the Testlink adapter, like in the example below.
+```java
+    @BeforeClass
+    public static void setup(){
+        TestRun.setSettingsValue(Settings.SettingParameters.URL_TO_TESTLINK_ADAPTER, 
+               "http://127.0.0.1:2221/taftestlinkadapter");
+   }
+```
+### c). Editing the `runSettings.properties` file
+Test run settings can be set in a TAF run file. Setting the value of `URL_TO_TAF_BACKEND` in this file will engage the TafBackendTestRunReporter.
+
+Either way of updating the `URL_TO_TAF_BACKEND` settings value will engage the reporting to this adapter.
+
+# Running the server
+While running the server it will continuously produce output. Received test run data will be stored in *TAF Backend Server* storage.
+
+gl:hf
+
+![ClaremontLogo](http://46.101.193.212/TAF/images/claremontlogo.gif "Claremont logo")
+
