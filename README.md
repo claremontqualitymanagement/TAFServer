@@ -31,3 +31,7 @@ Direct links to test case logs are provided.
 *Test case details view*
 
 Test case details are listed in the same display as regular TAF test case logs. Some general test case details, a section with the test data used during the test run to ease debugging, sections derived from the test steps in the test - and any test step with registered failures expanded. Screenshots displayed in the log, and HTML source saved. Suggestions for registering known errors are displayed upon errors. For further level of details the checkbox about verbose debugging info can be checked.
+
+A thin line in the bar above each test step indicates how long time was spent in that test step.
+
+Known errors are displayed separately in this view too.
