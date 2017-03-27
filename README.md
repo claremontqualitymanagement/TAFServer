@@ -127,6 +127,9 @@ Either way of updating the `URL_TO_TAF_BACKEND` settings value will engage the r
 # Running the server
 While running the server it will continuously produce output. Received test run data will be stored in *TAF Backend Server* storage.
 
+The server also incorporates an about page where version information can be accessed and links to relevant sources can be found.
+![AboutPage](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerAboutPage.png "The TAF Backend Server About page")
+
 gl:hf
 
 ![ClaremontLogo](http://46.101.193.212/TAF/images/claremontlogo.gif "Claremont logo")
