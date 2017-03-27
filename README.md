@@ -42,10 +42,35 @@ Known errors are displayed separately in this view too.
 
 # Getting started
 ## Pre-requisites
-To run the TAF Backend Server you must first make sure you meet the following pre-requisites:
+To run the *TAF Backend Server* you must first make sure you meet the following pre-requisites:
 * Obtain the **TafBackend.jar** file.
 * Make sure your TAF tests are running a TAF version of at least 2.5.24. 
 * Make sure you have a Java JRE of at least version 1.8 since *Taf Backend Server* is implemented with Java language level 8.
+* Tell your TAF tests to report results to *TAF Backend Server*.
+
+Don't worry. We'll walk you through the steps.
+
+## Obtaining the executable file
+Contact sales@claremont.se about *TAF Backend Server*. 
+
+## Check your TAF version
+In your test automation project, open the pom.xml file and look for a section like
+```Maven POM
+        <dependency>
+            <groupId>com.github.claremontqualitymanagement</groupId>
+            <artifactId>TestAutomationFramework</artifactId>
+            <version>2.5.24</version>
+        </dependency>
+```
+
+Make sure the version is at least 2.5.24
+
+## Check your java version
+Open a command prompt and write
+```
+java -version
+```
+When you press **enter** you'll be presented with the java version installed in your operating system. If you don't, either your java installation is not in your operating system path variable (this variable tells your operating system where to look for files when they are not in the current folder) or maybe you don't have java installed at all. Java is free of charge, and can be downloaded.
 
 ## Starting the server
 The server is started as a normal Java program, from the command line. 
