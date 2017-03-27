@@ -12,11 +12,15 @@ The *TAF Backend Server* has a REST API listening for TAF test run details to be
 The landing page displays the last five test runs with some graphs. This view enables swift tracking of if test case count increases or decreases, whan percentage of test cases are passing or failing, or failing with known errors - and emailing possibilities with direct links to test run results. Test runs with new errors are marked red. Test runs with encountered known errors are marked with a exclamation mark.
 Totally failed test cases can be removed.
 
+The landing page is intended to get more dashboard graphs, and is meant to be able to be used in kiosk mode on a screen visible in an office landscape, so it refreshes itself every 60 seconds.
+
 ### Test run listings page
 ![TestRunListingsPage](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerTestRunListingsPage.png "TAF Backend Server test run listings page example")
 *Test run listings page*
 
 The test run listings page displays a full list of test runs registered. Colors and symbols help for quick overview of run results. Direct links to specific test runs can be emailed from here, and test run removal can be performed. Test runs with new errors are marked red. Test runs with encountered known errors are marked with a exclamation mark.
+
+The run listings page is meant to be able to be used in kiosk mode on a screen visible in an office landscape, so it refreshes itself every 60 seconds.
 
 ### Test run details view
 ![TestRunDetailsView](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerTestRunDetailsPage.png "Test run details view")
@@ -35,3 +39,25 @@ Test case details are listed in the same display as regular TAF test case logs. 
 A thin line in the bar above each test step indicates how long time was spent in that test step.
 
 Known errors are displayed separately in this view too.
+
+# Getting started
+## Pre-requisites
+To run the TAF Backend Server you must first make sure you meet the following pre-requisites:
+* Obtain the **TafBackend.jar** file.
+* Make sure your TAF tests are running a TAF version of at least 2.5.24. 
+* Make sure you have a Java JRE of at least version 1.8 since *Taf Backend Server* is implemented with Java language level 8.
+
+## Starting the server
+The server is started as a normal Java program, from the command line. 
+
+### Usage example
+```
+java -jar TafBackend.jar port=8080 store=C:\temp\TafBackend.db
+```
+`port` number is the web server port number for the server to enable access to *http://mytafbackendserver:8080/taf*.
+`store`parameter is the local storage file for registered test run data.
+
+Default `port`is `80` and default storage is a filed called `TafBackend.db` in the same folder as the jar file is run from. The name or file extension for the store file are irrelevant.
+
+## Running the server
+While running the server it will continuously produce output.
