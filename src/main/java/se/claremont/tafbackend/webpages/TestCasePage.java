@@ -6,12 +6,10 @@ import se.claremont.autotest.common.logging.LogPost;
 import se.claremont.autotest.common.reporting.HtmlStyles;
 import se.claremont.autotest.common.reporting.UxColors;
 import se.claremont.autotest.common.reporting.testcasereports.TestCaseLogReporterHtmlLogFile;
-import se.claremont.autotest.common.reporting.testrunreports.HtmlSummaryReport;
-import se.claremont.autotest.common.support.*;
+import se.claremont.autotest.common.support.StringManagement;
+import se.claremont.autotest.common.support.ValuePair;
 import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.autotest.common.testcase.TestCaseLogSection;
-import se.claremont.autotest.common.testrun.Settings;
-import se.claremont.autotest.common.testrun.TestRun;
 import se.claremont.tafbackend.statistics.StatisticsManager;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Page to view test case details
+ *
  * Created by jordam on 2017-03-19.
  */
 public class TestCasePage {
@@ -46,13 +46,12 @@ public class TestCasePage {
 
     public String asHtml(){
         StatisticsManager.statisticsCounter.addTestCaseView();
-        String html = "<!DOCTYPE html>" + LF + "<html lang=\"en\">" + LF + LF +
+        return "<!DOCTYPE html>" + LF + "<html lang=\"en\">" + LF + LF +
                 CommonSections.headSection(scriptSection(), styles(), extraHeadSections()) +
                 "  <body>" + LF + LF +
                 asHtmlSection() +
                 "  </body>" + LF + LF +
                 "</html>" + LF;
-        return html;
     }
 
     /**

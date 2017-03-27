@@ -3,15 +3,13 @@ package se.claremont.tafbackend.webpages;
 import se.claremont.autotest.common.reporting.TafVersionGetter;
 import se.claremont.autotest.common.reporting.UxColors;
 import se.claremont.autotest.common.reporting.testrunreports.HtmlSummaryReport;
-import se.claremont.autotest.common.support.StringManagement;
-import se.claremont.autotest.common.testcase.TestCase;
-import se.claremont.autotest.common.testrun.Settings;
-import se.claremont.autotest.common.testrun.TestRun;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * Shared sections for web pages - for unified look and feel.
+ *
  * Created by jordam on 2017-03-21.
  */
 public class CommonSections {
@@ -39,7 +37,7 @@ public class CommonSections {
     private static String LF = System.lineSeparator();
 
     private static String styles(String extraStyles) {
-        String styles = "\t\t\t\n" +
+        return "\t\t\t\n" +
                 "      body                    { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; width:90%; margin-left: 2%; margin-top: 1%; color: " + UxColors.DARK_GREY.getHtmlColorCode() + "; background-color: " + UxColors.LIGHT_BLUE.getHtmlColorCode() + "; }" + LF +
                 "      h1, h2                  { margin-top: 20px; margin-bottom: 10px; line-height: 1.1; font-family: inherit; }" + LF +
                 "      h1                      { font-size:24px; }" + LF +
@@ -60,7 +58,6 @@ public class CommonSections {
                 "      a." + TestRunDetailsPage.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":visited      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: none; }" + LF +
                 "      a." + TestRunDetailsPage.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase() + ":hover      { color: " + UxColors.DARK_BLUE.getHtmlColorCode() + "; text-decoration: underline; }" + LF +
                 extraStyles;
-        return styles;
     }
 
     public static String pageHeader(){

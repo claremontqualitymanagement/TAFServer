@@ -5,7 +5,7 @@ import se.claremont.autotest.common.logging.LogPost;
 import se.claremont.autotest.common.reporting.UxColors;
 import se.claremont.autotest.common.reporting.testcasereports.TestCaseLogReporterHtmlLogFile;
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
-import se.claremont.autotest.common.support.*;
+import se.claremont.autotest.common.support.StringManagement;
 import se.claremont.autotest.common.testcase.TestCase;
 import se.claremont.autotest.common.testrun.TestRun;
 import se.claremont.tafbackend.model.TestCaseMapper;
@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
+ * Page to view test run details
+ *
  * Created by jordam on 2017-03-19.
  */
 public class TestRunDetailsPage {

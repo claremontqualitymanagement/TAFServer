@@ -1,6 +1,8 @@
 package se.claremont.tafbackend.webpages;
 
 /**
+ * Generic page template for non-error-pages
+ *
  * Created by jordam on 2017-03-21.
  */
 public class InfoPage {

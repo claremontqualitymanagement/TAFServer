@@ -5,12 +5,13 @@ import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.server.Settings;
 import se.claremont.tafbackend.statistics.StatisticsManager;
-import se.claremont.tafbackend.storage.TestCaseCacheList;
 import se.claremont.tafbackend.storage.TestRunList;
 
 import java.util.Date;
 
 /**
+ * Standard entry point for this application
+ *
  * Created by jordam on 2017-03-18.
  */
 public class LandingPage {

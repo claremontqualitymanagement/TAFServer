@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.PrintStream;
 
 /**
+ * Command line interface for internal web server.
+ *
  * Created by jordam on 2017-03-18.
  */
 public class App {

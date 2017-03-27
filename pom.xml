@@ -146,11 +146,6 @@
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>${capability.glassfish.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
             <version>${capability.glassfish.version}</version>
         </dependency>

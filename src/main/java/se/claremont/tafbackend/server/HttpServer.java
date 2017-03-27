@@ -1,11 +1,6 @@
 package se.claremont.tafbackend.server;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,6 +8,8 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import se.claremont.tafbackend.storage.TestRunList;
 
 /**
+ * The HTTP server used for REST services end-points as well as web display
+ *
  * Created by jordam on 2017-03-18.
  */
 public class HttpServer {

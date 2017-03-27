@@ -1,11 +1,7 @@
 package se.claremont.tafbackend.storage;
 
-import se.claremont.autotest.common.testcase.TestCase;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Storing JSON string for each test case. Use new TestCaseMapper() with that string to obtain a TestCase object.

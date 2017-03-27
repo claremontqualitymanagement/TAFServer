@@ -8,9 +8,12 @@ import se.claremont.tafbackend.model.TestCaseMapper;
 import se.claremont.tafbackend.model.TestRunMapper;
 import se.claremont.tafbackend.server.Settings;
 import se.claremont.tafbackend.storage.TestRunList;
+
 import java.text.SimpleDateFormat;
 
 /**
+ * Test run listing page
+ *
  * Created by jordam on 2017-03-19.
  */
 public class TestRunListingsPage {

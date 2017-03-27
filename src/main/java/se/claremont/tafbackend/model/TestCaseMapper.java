@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Maps TAF TestCase objects from JSON to internally usable elements
+ *
  * Created by jordam on 2017-03-18.
  */
 public class TestCaseMapper {

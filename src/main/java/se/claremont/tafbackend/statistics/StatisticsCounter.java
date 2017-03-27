@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Class that holds information for statistical purposes. Should be persistated and re-loaded upon server restart.
+ *
  * Created by jordam on 2017-03-24.
  */
 public class StatisticsCounter {

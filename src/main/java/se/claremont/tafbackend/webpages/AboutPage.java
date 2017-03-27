@@ -1,6 +1,8 @@
 package se.claremont.tafbackend.webpages;
 
 /**
+ * The About page for this server
+ *
  * Created by jordam on 2017-03-23.
  */
 public class AboutPage {

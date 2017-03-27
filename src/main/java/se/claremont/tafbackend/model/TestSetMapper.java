@@ -1,14 +1,13 @@
 package se.claremont.tafbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
-import se.claremont.autotest.common.testset.TestSet;
 
 import java.io.IOException;
 
 /**
+ * Maps TAF TestSet objects from JSON to internally usable elements.
+ *
  * Created by jordam on 2017-03-20.
  */
 public class TestSetMapper {

@@ -11,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * REST and web end-points declarations for HttpServer
+ *
  * Created by jordam on 2017-03-18.
  */
 @Path("taf")

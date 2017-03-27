@@ -5,6 +5,8 @@ import se.claremont.tafbackend.server.HttpServer;
 import se.claremont.tafbackend.server.Settings;
 
 /**
+ * Testing of web pages
+ *
  * Created by jordam on 2017-03-19.
  */
 public class WebTest {

@@ -1,6 +1,8 @@
 package se.claremont.tafbackend.webpages;
 
 /**
+ * Support methods for web page creation
+ *
  * Created by jordam on 2017-03-19.
  */
 public class SupportMethods {
@@ -22,13 +24,4 @@ public class SupportMethods {
         return sb.toString();
     }
 
-    public static String toHtmlPage(String contentToBeBuffered){
-        return "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "    <head>\n" + CommonSections.headSection("", "", "") +
-                "    </head>\n" +
-                "    <body>\n" + contentToBeBuffered +
-                "  </body>\n" +
-                "</html>";
-    }
 }

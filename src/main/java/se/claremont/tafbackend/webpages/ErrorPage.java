@@ -1,6 +1,8 @@
 package se.claremont.tafbackend.webpages;
 
 /**
+ * Generic error page
+ *
  * Created by jordam on 2017-03-21.
  */
 public class ErrorPage {

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.reporting.testrunreports.TafBackendServerTestRunReporter;
 import se.claremont.tafbackend.storage.TestRunList;
 import se.claremont.tafbackend.webpages.ErrorPage;
-import se.claremont.tafbackend.webpages.SupportMethods;
 import se.claremont.tafbackend.webpages.TestRunDetailsPage;
 
 import java.io.IOException;
@@ -12,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Maps TAF TafBackendServerTestRunReporter objects (in JSON format) to internally usable elements
+ *
  * Created by jordam on 2017-03-18.
  */
 public class TestRunMapper {

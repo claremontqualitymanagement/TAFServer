@@ -3,6 +3,8 @@ package se.claremont.tafbackend.server;
 import java.io.File;
 
 /**
+ * Global settings. Updated from CLI.
+ *
  * Created by jordam on 2017-03-19.
  */
 public class Settings {

@@ -10,7 +10,7 @@ import se.claremont.tafbackend.server.Settings;
 import se.claremont.tafbackend.webpages.ErrorPage;
 import se.claremont.tafbackend.webpages.InfoPage;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class TestRunList {
             System.out.println("Finished saving changes to DB after " + (System.currentTimeMillis() - startTime) + " milliseconds.");
         } catch (IOException e) {
             System.out.println("Could not save changes to DB. Error: " + e.toString());
-        };
+        }
     }
     public static void loadTestRunsFromFile() {
         if(testMode)return;
@@ -96,7 +96,7 @@ public class TestRunList {
     public static String tryDelete(String testRunId) {
         Integer id = Integer.valueOf(testRunId);
         if(id == null) return ErrorPage.toHtml("<p>Cannot delete test run with id '" + testRunId + "'. Failed to interprete an id number from it.</p>");
-        int idVerified = (int)id;
+        int idVerified = id;
         if(size() < id) return ErrorPage.toHtml("<p>Cannot delete test run with id '" + id.toString() + "'. Highest id is '" + size() + "'.</p>");
         if(id < 0) return ErrorPage.toHtml("<p>Cannot delete test run with negative id. Request for removal of test run with id '" + id + "' denied.</p>");
         String contentToRemove = jsonStringList.get(id);

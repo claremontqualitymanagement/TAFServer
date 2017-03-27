@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import se.claremont.autotest.common.logging.LogPost;
 
 /**
+ * Not used yet. Maybe should be used in the future to enable better support for parallel test execution.
+ *
  * Created by jordam on 2017-03-18.
  */
 public class LogPostMapper {

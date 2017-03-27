@@ -12,8 +12,6 @@ import se.claremont.autotest.restsupport.RestSupport;
 import se.claremont.tafbackend.server.HttpServer;
 import se.claremont.tafbackend.server.Settings;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
