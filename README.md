@@ -54,8 +54,8 @@ Don't worry. We'll walk you through the steps.
 Contact sales@claremont.se about *TAF Backend Server*. 
 
 ## Check your TAF version
-In your test automation project, open the pom.xml file and look for a section like
-```Maven POM
+In your test automation project, open the `pom.xml` file and look for a section like
+```maven
         <dependency>
             <groupId>com.github.claremontqualitymanagement</groupId>
             <artifactId>TestAutomationFramework</artifactId>
