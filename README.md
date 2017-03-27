@@ -42,18 +42,19 @@ Known errors are displayed separately in this view too.
 
 # Getting started
 ## Pre-requisites
-To run the *TAF Backend Server* you must first make sure you meet the following pre-requisites:
-* Obtain the **TafBackend.jar** file.
-* Make sure your TAF tests are running a TAF version of at least 2.5.24. 
-* Make sure you have a Java JRE of at least version 1.8 since *Taf Backend Server* is implemented with Java language level 8.
-* Tell your TAF tests to report results to *TAF Backend Server*.
+To ger going with the *TAF Backend Server* you must first make sure you perform the following steps:
+1. Obtain the **TafBackend.jar** file.
+2. Make sure your TAF tests are running a TAF version of at least 2.5.24. 
+3. Make sure you have a Java JRE of at least version 1.8 since *Taf Backend Server* is implemented with Java language level 8.
+4. Start your *TAF Backed Server*
+4. Tell your TAF tests to report results to *TAF Backend Server*.
 
 Don't worry. We'll walk you through the steps.
 
-## Obtaining the executable file
+## 1. Obtaining the executable file
 Contact sales@claremont.se about *TAF Backend Server*. 
 
-## Check your TAF version
+## 2. Check your TAF version
 In your test automation project, open the `pom.xml` file and look for a section like
 ```pom
         <dependency>
@@ -63,9 +64,12 @@ In your test automation project, open the `pom.xml` file and look for a section 
         </dependency>
 ```
 
-Make sure the version is at least 2.5.24
+Make sure the version is at least 2.5.24.
 
-## Check your java version
+If your are running tests from the command line interface the TAF version is also visible in HTML summary reports for test runs.
+
+
+## 3. Check your java version
 Open a command prompt and write
 ```
 java -version
@@ -74,7 +78,7 @@ When you press **enter** you'll be presented with the java version installed in 
 
 Make sure your java is at least version 1.8.
 
-## Starting the server
+## 4. Starting the server
 The server is started as a normal Java program, from the command line. 
 
 ### Usage example
@@ -86,7 +90,7 @@ java -jar TafBackend.jar port=8080 store=C:\temp\TafBackend.db
 
 Default `port`is `80` and default storage is a filed called `TafBackend.db` in the same folder as the jar file is run from. The name or file extension for the store file are irrelevant.
 
-## Preparing your TAF test automation to post results to *TAF Backend Server*
+## 5. Preparing your TAF test automation to post results to *TAF Backend Server*
 The TAF Backend Server TestRunReporter is engaged when the TAF test run setting called `URL_TO_TAF_BACKEND` is changed from its default value. There are three ways of doing this, since there are three ways of updating a run settings variable for TAF. 
 One way of doing this is from the command line when starting your TAF test run.
 
