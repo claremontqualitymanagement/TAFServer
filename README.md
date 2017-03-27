@@ -56,7 +56,7 @@ To ger going with the *TAF Backend Server* you must first make sure you perform 
 2. Make sure your TAF tests are running a TAF version of at least 2.5.24. 
 3. Make sure you have a Java JRE of at least version 1.8 since *Taf Backend Server* is implemented with Java language level 8.
 4. Start your *TAF Backed Server*
-4. Tell your TAF tests to report results to *TAF Backend Server*.
+5. Tell your TAF tests to report results to *TAF Backend Server*.
 
 Don't worry. We'll walk you through the steps.
 
@@ -123,6 +123,9 @@ Another way is programatically, by adding the Testlink adapter, like in the exam
 Test run settings can be set in a TAF run file. Setting the value of `URL_TO_TAF_BACKEND` in this file will engage the TafBackendTestRunReporter.
 
 Either way of updating the `URL_TO_TAF_BACKEND` settings value will engage the reporting to this adapter.
+
+### Making sure test report links to screenshots and other files are accessible from *TAF Backend Server*
+Currently the TAF Backend Server do not host external files. This means you have to make sure that either files (TAF system setting `BASE_LOG_FOLDER`) are stored where every test automation stakeholder can access them (UNC path over CIFS/SAMBA), or setting up a web server and directing the TAF `BASE_LOG_FOLDER` to the www root of that web server. Using HTTP protocol to access these files require a change also in TAF setting `HTML_REPORTS_LINK_PREFIX` to '*http*' or '*https*'.
 
 # Running the server
 While running the server it will continuously produce output. Received test run data will be stored in *TAF Backend Server* storage.
