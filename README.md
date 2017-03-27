@@ -2,6 +2,8 @@
 
 This is the TAF test automation solution backend. It's not needed to use TAF, but can be used for easy access to test run results, and to keep track of relevant key performance indicators for test automation status and progress.
 
+For more information about TAF, visit the [TAF GitHub repo](https://github.com/claremontqualitymanagement/TestAutomationFramework "TAF on GitHub").
+
 ## What it does
 The *TAF Backend Server* has a REST API listening for TAF test run details to be posted to it. The *TAF Backend Server* enables tracking of test runs, analyzing trends and ease of access and communicating test run results throughout the organization (and beyond).
 
