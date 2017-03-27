@@ -9,14 +9,14 @@ The *TAF Backend Server* has a REST API listening for TAF test run details to be
 ![LandingPage](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerLandingPage.png "TAF Backend Server landing page example")
 *The landing page*
 
-The landing page displays the last five test runs with some graphs. This view enables swift tracking of if test case count increases or decreases, whan percentage of test cases are passing or failing, or failing with known errors - and emailing possibilities with direct links to test run results.
+The landing page displays the last five test runs with some graphs. This view enables swift tracking of if test case count increases or decreases, whan percentage of test cases are passing or failing, or failing with known errors - and emailing possibilities with direct links to test run results. Test runs with new errors are marked red. Test runs with encountered known errors are marked with a exclamation mark.
 Totally failed test cases can be removed.
 
 ### Test run listings page
 ![TestRunListingsPage](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerTestRunListingsPage.png "TAF Backend Server test run listings page example")
 *Test run listings page*
 
-The test run listings page displays a full list of test runs registered. Colors and symbols help for quick overview of run results. Direct links to specific test runs can be emailed from here, and test run removal can be performed.
+The test run listings page displays a full list of test runs registered. Colors and symbols help for quick overview of run results. Direct links to specific test runs can be emailed from here, and test run removal can be performed. Test runs with new errors are marked red. Test runs with encountered known errors are marked with a exclamation mark.
 
 ### Test run details view
 ![TestRunDetailsView](http://46.101.193.212/TAF/images/TafBackendServer/TafBackendServerTestRunDetailsPage.png "Test run details view")
